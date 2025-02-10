@@ -1,4 +1,3 @@
-from importlib.resources import contents
 from django.shortcuts import render
 
 # Create your views here.
@@ -49,7 +48,7 @@ posts = [
 
 def index(request):
     template = 'blog/index.html'
-    return render(request, template, {'posts':reversed(posts)})
+    return render(request, template, {'posts': reversed(posts)})
 
 
 def post_detail(request, id):
@@ -60,4 +59,4 @@ def post_detail(request, id):
 
 def category_posts(request, category_slug):
     template = 'blog/category.html'
-    return render(request, template, {'category_slug':category_slug})
+    return render(request, template, {'category_slug': category_slug})
