@@ -52,9 +52,10 @@ def index(request):
 def post_detail(request, post_id):
     all_id = [post['id'] for post in posts]
     if post_id not in all_id:
-        raise Http404(f'Страница не найдена.')
+        raise Http404('Страница не найдена.')
     return render(request, 'blog/detail.html', {'post': posts[post_id]})
 
 
 def category_posts(request, category_slug):
-    return render(request, 'blog/category.html', {'category_slug': category_slug})
+    return render(request, 'blog/category.html',
+                  {'category_slug': category_slug})
