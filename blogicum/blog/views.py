@@ -1,6 +1,5 @@
 from django.shortcuts import render
-
-# Create your views here.
+from django.http import Http404
 
 posts = [
     {
@@ -47,16 +46,15 @@ posts = [
 
 
 def index(request):
-    template = 'blog/index.html'
-    return render(request, template, {'posts': reversed(posts)})
+    return render(request, 'blog/index.html', {'posts': reversed(posts)})
 
 
-def post_detail(request, id):
-    template = 'blog/detail.html'
-    post = posts[id]
-    return render(request, template, {'post': post})
+def post_detail(request, post_id):
+    all_id = [post['id'] for post in posts]
+    if post_id not in all_id:
+        raise Http404(f'Страница не найдена.')
+    return render(request, 'blog/detail.html', {'post': posts[post_id]})
 
 
 def category_posts(request, category_slug):
-    template = 'blog/category.html'
-    return render(request, template, {'category_slug': category_slug})
+    return render(request, 'blog/category.html', {'category_slug': category_slug})

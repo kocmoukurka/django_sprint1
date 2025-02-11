@@ -4,23 +4,37 @@
     <a class="navbar-brand" href="{% url 'blog:index' %}">
       <img src='{% static "img/logo.png" %}' width="30" height="30" class="d-inline-block align-top" alt="">
       Блогикум
-    </a>
-    <ul class="nav  nav-pills">
-      <li class="nav-item">
-        <a class="nav-link active" href="{% url 'blog:index' %}">
-          Лента записей
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'pages:about' %}">
-          О проекте
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'pages:rules' %}">
-          Наши правила
-        </a>
-      </li>
-    </ul>
+    </a>    
+    {% with view_name=request.resolver_match.view_name %}
+      <ul class="nav  nav-pills">
+        <li class="nav-item">
+          {% if view_name == 'blog:index' %}
+            <a class="nav-link active" href="{% url 'blog:index' %}">
+          {% else %} 
+            <a class="nav-link" href="{% url 'blog:index' %}">
+          {% endif %}
+            Лента записей
+          </a>
+        </li>
+        <li class="nav-item">
+          {% if view_name == 'pages:about' %}
+            <a class="nav-link active" href="{% url 'pages:about' %}">
+          {% else %} 
+            <a class="nav-link" href="{% url 'pages:about' %}">
+          {% endif %}
+            О проекте
+          </a>
+        </li>
+        <li class="nav-item">
+          {% if view_name == 'pages:rules' %}
+            <a class="nav-link active" href="{% url 'pages:rules' %}">
+          {% else %} 
+            <a class="nav-link" href="{% url 'pages:rules' %}">
+          {% endif %}
+            Наши правила
+          </a>
+        </li>
+      </ul>    
+    {% endwith %}
   </div>
 </nav>
