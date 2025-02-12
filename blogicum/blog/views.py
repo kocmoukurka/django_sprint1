@@ -45,14 +45,16 @@ posts = [
 ]
 
 
+all_id = {post['id']: post['id'] for post in posts}
+
+
 def index(request):
     return render(request, 'blog/index.html', {'posts': reversed(posts)})
 
 
 def post_detail(request, post_id):
-    all_id = [post['id'] for post in posts]
     if post_id not in all_id:
-        raise Http404('Страница не найдена.')
+        raise Http404(f'Страница №{post_id} не найдена.')
     return render(request, 'blog/detail.html', {'post': posts[post_id]})
 
 
